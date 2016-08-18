@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.dokstore.documents.hypoport.de/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://dokstore.documents.hypoport.de/" name="SoapDokStoreServiceImplService" targetNamespace="http://soap.dokstore.documents.hypoport.de/">
+  <wsdl:import location="http://ds.dokstore.hypoport.local/dokstore/service/dokStore?wsdl=SoapDokStoreService.wsdl" namespace="http://dokstore.documents.hypoport.de/">
+    </wsdl:import>
+  <wsdl:binding name="SoapDokStoreServiceImplServiceSoapBinding" type="ns1:SoapDokStoreService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="register">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="register">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putDokument">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="putDokument">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putDokumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unregister">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="unregister">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="unregisterResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createEmptyDokument">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createEmptyDokument">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createEmptyDokumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDokument">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getDokument">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDokumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putDokumentWithId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="putDokumentWithId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putDokumentWithIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SoapDokStoreServiceImplService">
+    <wsdl:port binding="tns:SoapDokStoreServiceImplServiceSoapBinding" name="SoapDokStoreServiceImplPort">
+      <soap:address location="http://ds.dokstore.hypoport.local/dokstore/service/dokStore"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

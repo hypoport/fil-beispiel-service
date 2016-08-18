@@ -1,0 +1,88 @@
+project.ext {
+  artifactId = 'vil-beispiel-service'
+}
+
+repositories {
+  mavenLocal()
+  maven { url "http://nexus-beta.hypoport.local/nexus/content/repositories/europace2/" }
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url "http://nexus-beta.hypoport.local/nexus/content/repositories/europace2/" }
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.6.RELEASE"
+  }
+}
+
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+dependencies {
+  compile "org.springframework.boot:spring-boot-starter-web"
+}
+
+test {
+  useTestNG() {
+    excludeGroups 'integrationTest'
+  }
+}
+
+task integrationTest(type: Test) {
+  useTestNG() {
+    includeGroups 'integrationTest'
+  }
+  testLogging.showStandardStreams = false
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'de.hypoport.fil.example.Application'
+  }
+}
+
+task wsimport {
+  ext.destDir = file("${projectDir}/src/main/generated")
+  doLast {
+    ant {
+      sourceSets.main.output.classesDir.mkdirs()
+      destDir.mkdirs()
+      taskdef(name: 'wsimport',
+          classname: 'com.sun.tools.ws.ant.WsImport',
+          classpath: configurations.jaxws.asPath
+      )
+      wsimport(keep: true,
+          destdir: sourceSets.main.output.classesDir,
+          sourcedestdir: destDir,
+          extension: "true",
+          verbose: "false",
+          quiet: "false",
+          package: "com.example.client.api",
+          xnocompile: "true",
+          wsdl: 'src/main/resources/api.wsdl') {
+        xjcarg(value: "-XautoNameResolution")
+      }
+    }
+  }
+}
+
+/*
+build {
+  finalizedBy 'writeVersionTxt'
+}
+
+task writeVersionTxt << {
+  new File(project.name, "version.txt").withWriter { out ->
+    out.print project.version
+  }
+}
+*/
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.14'
+}
